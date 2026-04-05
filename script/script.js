@@ -82,3 +82,20 @@ setInterval(() => {
 }, 1000);
 
 document.addEventListener("DOMContentLoaded", draw);
+
+async function compartilhar() {
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: "Meu projeto",
+        text: "Olha isso aqui",
+        url: "https://example.com"
+      });
+      console.log("Compartilhado!");
+    } catch (err) {
+      console.log("Erro:", err);
+    }
+  } else {
+    alert("Seu navegador não suporta compartilhamento 😢");
+  }
+}
