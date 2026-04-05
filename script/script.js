@@ -84,7 +84,10 @@
 // document.addEventListener("DOMContentLoaded", draw);
 
 async function compartilhar() {
+  alert("entrou na função");
+
   if (navigator.share) {
+    alert("tem suporte");
     try {
       await navigator.share({
         title: "Meu projeto",
