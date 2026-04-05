@@ -84,21 +84,17 @@
 // document.addEventListener("DOMContentLoaded", draw);
 
 async function compartilhar() {
-  alert("entrou na função");
+  const response = await fetch("https://dummyimage.com/1080x1920/000/fff&text=Meu+Projeto");
+  const blob = await response.blob();
 
-  if (navigator.share) {
-    alert("tem suporte");
-    try {
-      await navigator.share({
-        title: "Meu projeto",
-        text: "Olha isso aqui",
-        url: "https://example.com"
-      });
-      console.log("Compartilhado!");
-    } catch (err) {
-      console.log("Erro:", err);
-    }
+  const file = new File([blob], "imagem.png", { type: blob.type });
+
+  if (navigator.share && navigator.canShare({ files: [file] })) {
+    await navigator.share({
+      files: [file],
+      title: "Meu projeto"
+    });
   } else {
-    alert("Seu navegador não suporta compartilhamento 😢");
+    alert("Não suporta imagem 😢");
   }
 }
